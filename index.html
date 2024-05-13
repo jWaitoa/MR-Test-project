@@ -8,7 +8,12 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="#home">My Cart</a>
+        <div class="shopping-cart">
+            <p>My Cart <span class="quantity">(0)</span></p>
+        </div>
+        <div class="list"></div>
+    </div>
+    <div class="card" id="card">
     </div>
     <div class="row">
         <img class="img" src="images/classic-tee.jpg">
@@ -23,7 +28,7 @@
                 </p>
             </div>
             <div class="sizeButton" id="sizeOptions"></div>
-            <button class="cart" id="addToCartBtn">ADD TO CART</button>
+            <button onclick="addToCart()" class="cart" id="addToCart">ADD TO CART</button>
         </div>
     </div>
 
