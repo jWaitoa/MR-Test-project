@@ -15,11 +15,18 @@ function updateProductDetails() {
                 button.textContent = option.label;
                 button.classList.add('sizeButton');
                 button.addEventListener('click', function() {
-                    console.log('Size selected:', option.label);
+                    // Removes the 'selected' class from all size options
+                    sizeOptionsContainer.querySelectorAll('.sizeButton').forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    // Add the 'selected' class to the clicked size option
+                    button.classList.add('selected');
+                    const sizeLabel = document.getElementById('sizeLabel');
+                    sizeLabel.textContent = option.label; // Updates size text content
                 });
                 sizeOptionsContainer.appendChild(button);
-            });
         });
+    });
 }
 
 // Calls function when page loads

@@ -12,12 +12,18 @@
     </div>
 
     <div class="row">
-        <img src="images/classic-tee.jpg">
+        <img class="img" src="images/classic-tee.jpg">
         <div class="column">
             <p class="title" id="title"></p>
             <p class="price" id="price"></p>
             <p class="description" id="description"></p>
-            <p class="size">SIZE<span style="color: #C90000;">*</span></p>
+            <div>
+                <p class="size">SIZE
+                    <span style="color: #C90000;">*</span>
+                    <span class="sizeLabel" id="sizeLabel"></span>
+                </p>
+            </div>
+            
             <div class="sizeButton" id="sizeOptions"></div>
             <button class="cart" id="addToCartBtn">ADD TO CART</button>
         </div>
