@@ -13,21 +13,22 @@ function updateProductDetails() {
     });
 }
 
-function selectButton(size) {
-  const sizeLabel = document.getElementById("sizeLabel");
-  sizeLabel.textContent = size; // Updates size text content
-}
-
 // Calls function when page loads
 window.onload = function () {
   updateProductDetails();
 };
 
+// Sets the sizeLabel's size when button's selected.
+function selectButton(size) {
+  const sizeLabel = document.getElementById("sizeLabel");
+  sizeLabel.textContent = size; // Updates size text content
+}
+
 let shoppingCart = document.querySelector(".shopping-cart");
 let card = document.querySelector(".card");
 let isCartOpen = false;
 
-// Opens / Closes shopping cart
+// Opens / closes shopping cart
 function accessCart(){
   if (!isCartOpen) {
     card.classList.add("active");
@@ -40,8 +41,8 @@ function accessCart(){
   }
 }
 
-let totalQuantity = 0;
 // Adds and updates items in cart
+let totalQuantity = 0;
 function addToCart() {
   const sizeLabel = document.getElementById("sizeLabel");
   let selectedSize = sizeLabel.textContent;
@@ -67,20 +68,18 @@ function addToCart() {
 function cartHasExistingSize(selectedSize) {
   let sizeExists = false;
 
-  // Checks if any items are in cart.
-  var cards = document.getElementById("card").childElementCount;
-  if (cards > 0) {
+  if (totalQuantity > 0) {
     var cards = document.querySelectorAll(".card > div");
+    // Iterates through each cart item
     cards.forEach((cartItem) => {
       // Get the size of the current cart item
-      let itemSize = cartItem.querySelector(".cart-size").textContent;
+      let cartItemSize = cartItem.querySelector(".cart-size").textContent;
 
-      // Check if the current item's size matches the selected size
-      if (itemSize === selectedSize) {
+      if (cartItemSize === selectedSize) {
         // Increment the quantity of the current item
-        let quantityElement = cartItem.querySelector(".quantity");
-        let newQuantity = parseInt(quantityElement.textContent) + 1;
-        quantityElement.textContent = newQuantity;
+        let currentQuantity = cartItem.querySelector(".quantity");
+        let updatedQuantity = parseInt(currentQuantity.textContent) + 1;
+        currentQuantity.textContent = updatedQuantity;
         sizeExists = true;
       }
     });
@@ -95,7 +94,6 @@ function createNewRow(selectedSize) {
   let price = document.getElementById("price").textContent;
 
   var cartRow = document.createElement("div");
-  cartRow.innerText = selectedSize;
   var cartItems = document.getElementsByClassName("card")[0];
 
   var cartRowContents = `
