@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Shopping prototype</title>
-</head>
-<body>
-    <div class="topnav">
-        <div class="shopping-cart">
-            <p>My Cart <span class="quantity">(0)</span></p>
+  </head>
+  <body>
+    <nav>
+      <div class="topnav">
+        <div onclick="accessCart()" class="shopping-cart">
+          <p>My Cart <span class="quantity">(0)</span></p>
         </div>
         <div class="list"></div>
-    </div>
-    <div class="card" id="card">
-    </div>
-    <div class="row">
-        <img class="img" src="images/classic-tee.jpg">
-        <div class="column">
-            <p class="title" id="title"></p>
-            <p class="price" id="price"></p>
-            <p class="description" id="description"></p>
-            <div>
-                <p class="size">SIZE
-                    <span style="color: #C90000;">*</span>
-                    <span class="sizeLabel" id="sizeLabel"></span>
-                </p>
-            </div>
-            <div class="sizeButton" id="sizeOptions"></div>
-            <button onclick="addToCart()" class="cart" id="addToCart">ADD TO CART</button>
+      </div>
+      <div class="card" id="card">
+      </div>
+    </nav>
+
+    <div class="presentation">
+      <img class="img" src="images/classic-tee.jpg" />
+      <div class="column">
+        <p class="title" id="title"></p>
+        <p class="price" id="price"></p>
+        <p class="description" id="description"></p>
+        <div>
+          <p class="size">
+            SIZE
+            <span style="color: #c90000">*</span>
+            <span class="sizeLabel" id="sizeLabel"></span>
+          </p>
         </div>
+        <div class="sizeButton" id="sizeOptions"></div>
+        <div class="buttons">
+            <button class="sizeButton" onclick="selectButton('S')">S</button>
+            <button class="sizeButton" onclick="selectButton('M')">M</button>
+            <button class="sizeButton" onclick="selectButton('L')">L</button>
+        </div>
+        <button onclick="addToCart()" class="cart" id="addToCart">
+          ADD TO CART
+        </button>
     </div>
+</div>
 
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>

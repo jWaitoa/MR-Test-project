@@ -8,31 +8,14 @@ function updateProductDetails() {
     })
     .then((data) => {
       document.getElementById("title").textContent = data.title;
-      document.getElementById("price").textContent =
-        "$" + data.price.toFixed(2);
+      document.getElementById("price").textContent = "$" + data.price.toFixed(2);
       document.getElementById("description").textContent = data.description;
-
-      // Displays size options
-      const sizeOptionsContainer = document.getElementById("sizeOptions");
-      data.sizeOptions.forEach((option) => {
-        const button = document.createElement("button");
-        button.textContent = option.label;
-        button.classList.add("sizeButton");
-        button.addEventListener("click", function () {
-          // Removes the 'selected' class from all size options
-          sizeOptionsContainer
-            .querySelectorAll(".sizeButton")
-            .forEach((option) => {
-              option.classList.remove("selected");
-            });
-          // Add the 'selected' class to the clicked size option
-          button.classList.add("selected");
-          const sizeLabel = document.getElementById("sizeLabel");
-          sizeLabel.textContent = option.label; // Updates size text content
-        });
-        sizeOptionsContainer.appendChild(button);
-      });
     });
+}
+
+function selectButton(size) {
+  const sizeLabel = document.getElementById("sizeLabel");
+  sizeLabel.textContent = size; // Updates size text content
 }
 
 // Calls function when page loads
@@ -41,13 +24,11 @@ window.onload = function () {
 };
 
 let shoppingCart = document.querySelector(".shopping-cart");
+let card = document.querySelector(".card");
 let isCartOpen = false;
 
 // Opens / Closes shopping cart
-shoppingCart.addEventListener("click", () => {
-
-  let card = document.querySelector(".card");
-
+function accessCart(){
   if (!isCartOpen) {
     card.classList.add("active");
     shoppingCart.classList.add("active");
@@ -57,27 +38,35 @@ shoppingCart.addEventListener("click", () => {
     shoppingCart.classList.remove("active");
     isCartOpen = false;
   }
-});
+}
 
 let totalQuantity = 0;
 // Adds and updates items in cart
 function addToCart() {
-  let selectedSize = document.querySelector(".sizeButton.selected").textContent;
+  const sizeLabel = document.getElementById("sizeLabel");
+  let selectedSize = sizeLabel.textContent;
 
-  // Increment cart quantity
-  totalQuantity++;
-  document.querySelector(".quantity").textContent = `(${totalQuantity})`;
+  if (!selectedSize) {
+    alert("Please select a size before adding to cart.");
+  }
 
-  let existingSize = cartHasExistingSize(selectedSize);
-  if (!existingSize) {
-    // Creates a new item in cart
-    createNewRow(selectedSize);
+  else {
+    // Increment cart quantity
+    totalQuantity++;
+    document.querySelector(".quantity").textContent = `(${totalQuantity})`;
+
+    let existingSize = cartHasExistingSize(selectedSize);
+    if (!existingSize) {
+      // Creates a new item in cart
+      createNewRow(selectedSize);
+    }
   }
 }
 
 // Looks for existing sizes in cart and updates quantity if true.
 function cartHasExistingSize(selectedSize) {
   let sizeExists = false;
+
   // Checks if any items are in cart.
   var cards = document.getElementById("card").childElementCount;
   if (cards > 0) {
@@ -100,6 +89,7 @@ function cartHasExistingSize(selectedSize) {
 }
 
 let currentHeight = 0;
+// Creates a new item in shopping cart
 function createNewRow(selectedSize) {
   let title = document.getElementById("title").textContent;
   let price = document.getElementById("price").textContent;
@@ -108,7 +98,6 @@ function createNewRow(selectedSize) {
   cartRow.innerText = selectedSize;
   var cartItems = document.getElementsByClassName("card")[0];
 
-  // Creates a new cart row
   var cartRowContents = `
     <div class="cart-row">
         <img class="cart-img" src="images/classic-tee.jpg">
@@ -122,6 +111,6 @@ function createNewRow(selectedSize) {
   cartItems.append(cartRow);
 
   // Increments height of the cart
-  currentHeight += 30;
+  currentHeight += 26;
   document.getElementById("card").style.height = currentHeight + "vh";
 }
