@@ -144,14 +144,15 @@
 }
 
 .cart-img{
-    width: 100px;
-    max-height: 200px;
+    width: 80px;
+    max-height: 160px;
 }
 
 .cart-row {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    padding: 20px;
 }
 
 .cart-column {
